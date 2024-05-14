@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup|E waste Hub</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container main">
+      <div class="row">
+        <div class="col-md-6 side-image">
+                       
+            <!-------------      image     ------------->
+            
+           
+        
+            
+        </div>
+        <div class="col-md-6 right">
+            <div class="input-box">
+                <header>Create an Account</header>
+        <form action="/signup" method="post">
+            <div class="input-field">
+              
+                <input type="text" class="input" name="username" id="name"  required autocomplete="off">
+                <label for="name">User Name</label>
+            </div>
+
+            <div class="input-field">
+              
+                <input type="text" class="input" name="email" id="mail"  required autocomplete="off">
+                <label for="name">Email</label>
+            </div>
+           
+            <div class="input-field">
+               
+                <input type="password"  class="input"name="password" id="password"  required>
+                <label for="password">Password</label></div>
+          
+            <div class="input-field">
+               
+                <input type="password"  class="input"name="confirmpassword" id="confirmpassword"  required>
+                <label for="password">Confirm Password</label></div>
+
+                <div class="input-field"> 
+                    <input type="checkbox" id="showPassword"> 
+                    <label for="checkbox2">Show Password</label>
+                            
+                </div>
+      
+            <div class="input-field">
+            <input type="submit" class="submit" value="Sign Up" id="submitbtn">
+        </div>
+        <div class="signin">
+            <span><p>Already have an Account? <a href="/login">Login</a></p></span>
+        </div>
+        </form>
+    </div>
+    </div>
+</div>
+</div>
+
+</div> 
+<script>
+    const passwordInput = document.getElementById('password');
+    const confirmPasswordInput=document.getElementById('confirmpassword');
+    const showPasswordCheckbox = document.getElementById('showPassword');
+    const emailInput=document.getElementById('mail');
+    const unameInput=document.getElementById('name');
+
+   
+
+    showPasswordCheckbox.addEventListener('change', function () {
+        // If the checkbox is checked, show the password, otherwise hide it
+        const passwordFieldType = this.checked ? 'text' : 'password';
+        passwordInput.type = passwordFieldType;
+        confirmPasswordInput.type = passwordFieldType;
+    });
+
+    submitbtn.addEventListener('click',function(event){
+        const pass=passwordInput.value;
+        const confirm_pass=confirmPasswordInput.value;
+        const email=emailInput.value;
+        const uname=unameInput.value;
+        const emailPattern = /^[^\s@]+@[^\s@]+\.(com|net|org|edu|gov|mil|info|biz|me|co|uk|ca|de|jp|fr|au|us|ru|ch|it|nl|se|no|es|tv)$/i;
+        if(!uname){alert('Please Enter User name');
+        event.preventDefault();}
+        else if(!emailPattern.test(email)){
+            alert('Please Enter a Valid Email Address');
+            event.preventDefault();
+        }
+     
+        else if(pass!=confirm_pass){
+            alert('Passwords do not Match!');
+            event.preventDefault();
+        }
+        else if(pass.length<5){
+            alert('Password must be 5 characters long')
+            event.preventDefault();
+        }
+
+        window.onpageshow = function() {
+            document.getElementById('name').value = '';
+            document.getElementById('password').value = '';
+            document.getElementById('confirmpassword').value = '';
+            document.getElementById('mail').value = '';
+        };
+        
+    });
+</script>
+</body>
+</html>

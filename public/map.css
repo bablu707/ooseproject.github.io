@@ -1,0 +1,105 @@
+*
+{
+    margin: 0px;
+    padding: 0px;
+}
+header
+{
+    flex-direction: row;
+    align-items: center;
+   display: flex;
+    gap:40px;
+    border-bottom: 1px solid gray;
+    padding: 10px;
+}
+form
+{
+  width: 30%;
+}
+#city
+{
+    width: 95%;
+    border-radius: 10px;
+    padding:10px;
+}
+
+form .list
+{
+  width: 29%;
+  position: absolute;
+  z-index: 2;
+  background-color: white;
+}
+.listItems
+{
+  list-style: none;
+  padding: 5px;
+  font-size: 20px;
+}
+
+.listItems:hover{
+  background-color: whitesmoke;
+}
+#map {
+  position: absolute;
+  top: 56px;
+  bottom: 0px;
+  width: 100%;
+}
+.marker {
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    background-image: url('images/orange.png');
+  }
+    .mapboxgl-popup {
+    max-width: 200px;
+    }
+
+    .mapboxgl-popup-content {
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    }
+
+  .addDiv
+  {
+    position: absolute;
+    left:70%;
+    top:30%;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 10px;
+  }
+  #submit
+{
+    padding: 5px;
+    background-color: blue;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+}
+  @media only screen and (max-width: 900px) {
+    header
+    {
+        flex-direction: column;
+        gap: 10px;
+    }
+    form
+    {
+      width: 90%;
+    }
+    .restSearch
+    {
+        margin: auto;
+    }
+    #map
+    {
+      top:100px;
+    }
+    form .list
+    {
+      width: 85%;
+    }
+}

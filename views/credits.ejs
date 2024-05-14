@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-Waste Facility Locator</title>
+<link rel="stylesheet" href="/creditstyle.css">
+</head>
+<body>
+
+
+
+ <!--header selection starts-->
+
+ <header>
+            
+    <a href="#" class="logo">E-waste locator</a>
+
+    <nav class="navbar">
+    <ul>
+       <li> <a class="active" href="/home">home</a></li>
+       <li><a href="/article">Article</a></li>
+       <li><a href="/steptostep">step to step guide</a></li>
+      
+       <li><a href="/map">Location</a></li>
+       <li><a href="/credits">credit</a></li>
+      
+       
+
+       
+       </ul>
+       </nav>
+       </header>
+
+
+    <div class="container">
+        <h1>Select Device Type and Device Brand</h1>
+        <div class="dropdown">
+        <form action="/creditPage" method="post">
+            <select id="deviceType">
+                <option value="Select Device">Select Device</option>
+                <% Object.keys(deviceData).forEach(function(deviceType) { %>
+                    
+                    <option value="<%= deviceType %>"><%= deviceType %></option>
+                <% }); %>
+            </select> 
+    
+            <select id="deviceBrand">
+                <option value="Select Brand">Select Brand</option>
+            </select>
+    
+            <button type="submit" id="calculateBtn">Calculate Credits</button>
+        </form>
+        
+    
+        <table>
+            <thead>
+                <tr>
+                    <th>Device Type</th>
+                    <th>Brand</th>
+                    <th>Metal Type</th>
+                    <th>Weight</th>
+                    <th>Credit</th>
+                </tr>
+            </thead>
+            <tbody id="resultTableBody">
+                <!-- Data will be dynamically added here -->
+            </tbody>
+        </table>
+        
+        
+        <script>
+            // When device type is selected, populate the brand dropdown with corresponding brands
+            document.getElementById('deviceType').addEventListener('change', function() {
+                var selectedDeviceType = this.value;
+                var brands =  <%-JSON.stringify(deviceData)%> [selectedDeviceType] || [];
+                var brandDropdown = document.getElementById('deviceBrand');
+                brandDropdown.innerHTML = '';
+                brands.forEach(function(brand) {
+                    var option = document.createElement('option');
+                    option.value = brand;
+                    option.textContent = brand;
+                    brandDropdown.appendChild(option);
+                });
+            });
+    
+    
+        document.getElementById('calculateBtn').addEventListener('click', async function(event) {
+            event.preventDefault()
+            var deviceType = document.getElementById('deviceType').value;
+            var deviceBrand = document.getElementById('deviceBrand').value;
+            
+            // Make an AJAX request to the server
+            var response = await fetch('/calculate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ deviceType: deviceType, deviceBrand: deviceBrand })
+            });
+    
+            // Handle the response
+            var data = await response.json();
+            // Update the table with the retrieved data
+            var tableBody = document.getElementById('resultTableBody');
+            tableBody.innerHTML = '';
+            var newRow = tableBody.insertRow();
+            newRow.insertCell(0).textContent = data.DeviceType;
+            newRow.insertCell(1).textContent = data.brand;
+            newRow.insertCell(2).textContent = data.metaltype;
+            newRow.insertCell(3).textContent = data.weight;
+            newRow.insertCell(4).textContent = data.credit;
+        });
+    
+    
+    
+        </script>
+        </div>
+        </div>
+
+     
+
+
+
+</body>
+</html>
+
+
+
+
+
